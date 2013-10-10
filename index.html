@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,maximum-scale=1,initial-scale=1,user-scalable=0"/>
+    <link name="apple-mobile-web-app-capable" content="yes"/>
+    <title>Турецкий</title>
+    <style>
+        body {
+            background: #fff;
+            color: #000;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .card {
+            margin: 0 auto;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .word,
+        .translate {
+            font-size: 25px;
+            line-height: 36px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .buttons span {
+            display: inline-block;
+            font-size: 18px;
+            line-height: 33px;
+            margin: 0 8px;
+            padding: 0 10px;
+
+            border: 1px solid #ccc;
+            border-radius: 50px;
+
+            cursor: pointer;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card">
+        <div class="word" id="word">слово</div>
+        <div class="translate" id="translate">перевод</div>
+        <div class="buttons">
+            <span class="show" id="show">показать</span>
+            <span class="next" id="next">дальше</span>
+        </div>
+    </div>
+
+    <script>
+        function init() {
+            var i, w,
+                show = _get('show'),
+                next = _get('next');
+
+            eWord = _get('word');
+            eTranslate = _get('translate');
+
+            for (i in lingvo) {
+                if (lingvo.hasOwnProperty(i)) {
+                    words.push(i);
+                    translates.push(lingvo[i]);
+                }
+            }
+
+            show.onclick = showWord;
+            next.onclick = nextWord;
+
+            nextWord();
+        }
+
+        function _get(name) {
+            return document.getElementById(name);
+        }
+
+        function getWord() {
+            var num = Math.round(Math.random() * (words.length - 1)),
+                reverse = Math.random() > 0.5,
+                word = [ words[num], translates[num] ];
+            return reverse ? word.reverse() : word;
+        }
+
+        function showWord() {
+            eTranslate.innerHTML = currentWord[1];
+        }
+
+        function nextWord() {
+            currentWord = getWord();
+            eWord.innerHTML = currentWord[0];
+            eTranslate.innerHTML = '?';
+        }
+
+        var eWord,
+            eTranslate,
+            currentWord = [],
+            words = [],
+            translates = [],
+            lingvo = {
+                'число' : 'numara',
+                'ноль' : 'sıfır',
+                'один' : 'bir',
+                'два' : 'iki',
+                'три' : 'üç',
+                'четыре' : 'dört',
+                'пять' : 'beş',
+                'шесть' : 'altı',
+                'семья' : 'yedi',
+                'восемь' : 'sekiz',
+                'девять' : 'dokuz',
+                'десять' : 'on',
+                'двадцать' : 'yirmi',
+                'тридцать' : 'otuz',
+                'сорок' : 'kırk',
+                'пятьдесят' : 'elli',
+                'шестьдесят' : 'altmış',
+                'семьдесят' : 'yetmiş',
+                'восемьдесят' : 'seksen',
+                'девяносто' : 'doksan',
+                'сто' : 'yüz',
+                'тысяча' : 'bin',
+                'миллион' : 'milyon',
+                'миллиард' : 'milyar',
+
+                'час' : 'saat',
+                'минута' : 'dakika',
+                'секунда' : 'saniye',
+                'четверть' : 'çeyrek',
+                'половина' : 'buçuk',
+
+                'неделя' : 'hafta',
+                'понедельник' : 'pazartesi',
+                'вторник' : 'salı',
+                'среда' : 'çarşamba',
+                'четверг' : 'perşembe',
+                'пятница' : 'cuma',
+                'суббота' : 'cumartesi',
+                'воскресенье' : 'pazar',
+
+                'месяц' : 'ay',
+                'январь' : 'ocak',
+                'февраль' : 'şubat',
+                'март' : 'mart',
+                'апрель' : 'nisan',
+                'май' : 'mayıs',
+                'июнь' : 'haziran',
+                'июль' : 'temmuz',
+                'август' : 'ağustos',
+                'сентябрь' : 'eylül',
+                'октябрь' : 'ekim',
+                'ноябрь' : 'kasım',
+                'декабрь' : 'aralık',
+                'время года' : 'mevsim',
+
+                'зима' : 'kış',
+                'весна' : 'ilkbahar',
+                'лето' : 'yaz',
+                'осень' : 'sonbahar',
+
+                'день' : 'gün',
+                'вечер' : 'akşam',
+                'ночь' : 'gece',
+                'утро' : 'sabah',
+
+                'человек' : 'insan',
+                'книга' : 'kitap',
+                'урок' : 'hangi',
+                'цветок' : 'çiçek',
+                'рука' : 'el',
+                'нога' : 'ayak',
+                'мать' : 'anne',
+                'семья' : 'aile',
+                'мост' : 'köprü',
+                'утюг' : 'ütü',
+                'брат' : 'kardeş',
+                'яблоко' : 'elma',
+                'ребенок' : 'çocuk',
+                'комната' : 'oda',
+                'стена' : 'duvar',
+                'окно' : 'pencere',
+                'стол' : 'masa',
+                'стул' : 'sandalye',
+                'кровать' : 'yatak',
+                'кухня' : 'mutfak',
+                'тетрадь' : 'defter',
+                'автобус' : 'ötöbüs',
+                'дом' : 'ev',
+                'машина' : 'araba',
+                'метро' : 'metro',
+                'собака' : 'köpek',
+                'сын' : 'oğul',
+                'карандаш' : 'kalem',
+                'школа' : 'okul',
+                'сладость' : 'şeker',
+                'кошка' : 'kedi',
+                'сумка' : 'çanta',
+                'дверь' : 'kapı',
+                'очки' : 'gözlük',
+                'глаз' : 'göz',
+                'стакан' : 'bardak',
+                'тарелка' : 'tabak',
+                'велосипед' : 'bisiklet',
+                'часы' : 'saat',
+                'друг' : 'arkadaş',
+                'дорога' : 'yol',
+                'младенец' : 'bebek',
+                'кофе' : 'kahve',
+                'чай' : 'çay',
+                'лошадь' : 'at',
+                'куртка' : 'ceket',
+                'роза' : 'gül',
+                'работа' : 'iş',
+                'страница' : 'sayfa',
+                'ключ' : 'anahtar',
+                'жена' : 'karı',
+                'дочь' : 'kız',
+
+                'умный' : 'akıllı',
+                'красивый' : 'güzel',
+                'больной' : 'hasta',
+                'интересный' : 'ilginç',
+                'сложный' : 'zor',
+                'холодно' : 'soğuk',
+
+                'здравствуйте' : 'merhaba',
+                'привет' : 'selam',
+                'доброе утро' : 'günaydın',
+                'добрый день' : 'iyi günler',
+                'добрый вечер' : 'iyi akşamlar',
+                'пока' : 'görüşürüz',
+                'до свидания' : 'hoşcakaın',
+                'спасибо' : 'teşekkür ederim',
+                'пожалуйста' : 'lutfen',
+
+                'директор' : 'müdür',
+                'архитектор' : 'mimar',
+                'учитель' : 'öğretmen',
+                'ученик' : 'öğrenci',
+                'врач' : 'doktor',
+                'медсестра' : 'hemşire',
+                'секретарь' : 'sekreter',
+                'футболист' : 'futbolcu',
+                'спортсмен' : 'sporcu',
+                'рабочий' : 'işçi',
+                'водитель' : 'şoför',
+                'актер' : 'aktör',
+                'пациент' : 'hasta',
+                'инженер' : 'mühendis'
+            };
+
+        init();
+    </script>
+
+</body>
+</html>
