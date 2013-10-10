@@ -1,0 +1,55 @@
+body {
+    background: #fff;
+    color: #000;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.trainer {
+    margin: 0 auto;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.trainer__info {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 12px;
+}
+
+.trainer__info span {
+    margin-right: 1em;
+}
+
+.card {
+}
+
+.card__word,
+.card__translate {
+    font-size: 25px;
+    line-height: 36px;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+.buttons_opened .buttons__show,
+.buttons .buttons__next { display: none }
+
+.buttons_opened .buttons__next { display: block }
+
+.button {
+    display: block;
+    font-size: 18px;
+    line-height: 100px;
+    margin: 0 auto;
+    width: 100px;
+
+    border: 1px solid #ccc;
+    border-radius: 100px;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+}
